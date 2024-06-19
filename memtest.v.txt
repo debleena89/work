@@ -1,0 +1,7 @@
+module  memory();
+reg [31:0] my_memory [0:255];
+ 
+initial begin
+ $readmemh("instructions.dat", my_memory);
+end
+endmodule

@@ -1,0 +1,33 @@
+Invariant 1: A predictable bus arbiter must manage
+coherence messages on the bus such that each core may
+issue a coherence request on the bus if and only if it is
+granted an access slot to the bus.
+
+Solutions:  The TDM arbiter manages the coherence requests such that
+each core can issue a coherence request message only when
+it is granted an access to the bus. This satisfies Invariant 1.
+
+My task: So to make sure that invariant1 is satisfied or not, the Arbiter
+should be examined. How to do this, what will be my approach?, and if it 
+not there then, I will do this to support Invariant 1.
+
+
+
+
+Invariant 2: The shared memory services requests to the
+same line in the order of their arrival to the shared memory
+
+Solutions: The shared memory uses a first-in-first-out (FIFO)
+arbitration between requests to the same cache line. We implement
+this arbitration using a look-up table (LUT) to queue
+pending requests (PR), denoted as PR LUT.
+Each entry consists of the address of the requested line,
+the identification of the requesting core, and the coherence
+message. The PR LUT queues requests by the order of their
+arrival. When the memory has the updated data of a cache
+line, it services the oldest pending request for that line. This
+satisfies Invariant 2. 
+
+My task: To solve this First I need to check how the FIFO queue is
+implemented, whether they kept any look-up-table or not, if it not there
+then I need to implement.
