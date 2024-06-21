@@ -17,7 +17,7 @@ module tb_Default_Project();
     parameter MEM_ADDRESS_BITS=14;
     parameter SCAN_CYCLES_MIN=0;
     parameter SCAN_CYCLES_MAX=1000;
-    parameter PROGRAM="C:/CC/2_core_single_cycle_2_ways/instructions.dat";
+    parameter PROGRAM="/home/debleena/CC/work/instructions.dat";
     parameter LOG_FILE="Default_Project.log";
 
     genvar i;
@@ -44,8 +44,8 @@ module tb_Default_Project();
   integer core0_finished;
   integer core1_finished;
     
-  localparam TEST_NAME0="C:/CC/2_core_single_cycle_2_ways/instructions.dat";
-  localparam TEST_NAME1="C:/CC/2_core_single_cycle_2_ways/instructions.dat";
+  localparam TEST_NAME0="/home/debleena/CC/work/instructions.dat";
+  localparam TEST_NAME1="/home/debleena/CC/work/instructions.dat";
 
 
     Default_Project #(
@@ -77,6 +77,28 @@ module tb_Default_Project();
            `REGISTER_FILE0[x] = 32'd0; `REGISTER_FILE1[x] = 32'd0;
         end
         $readmemh(PROGRAM, dut.memory.BRAM_inst.ram);
+//        dut.memory.BRAM_inst.ram[40] = 32'd1000;
+//        dut.memory.BRAM_inst.ram[41] = 32'd1050;
+//        dut.memory.BRAM_inst.ram[42] = 32'd2000;
+//        dut.memory.BRAM_inst.ram[43] = 32'd2050;
+//        dut.memory.BRAM_inst.ram[44] = 32'd2080;
+//        dut.memory.BRAM_inst.ram[45] = 32'd3000;
+//        dut.memory.BRAM_inst.ram[46] = 32'd1000;
+//        dut.memory.BRAM_inst.ram[47] = 32'd1050;
+//        dut.memory.BRAM_inst.ram[48] = 32'd2000;
+//        dut.memory.BRAM_inst.ram[49] = 32'd2050;
+//        dut.memory.BRAM_inst.ram[50] = 32'd2080;
+//        dut.memory.BRAM_inst.ram[51] = 32'd3000;
+//        dut.memory.BRAM_inst.ram[52] = 32'd1000;
+//        dut.memory.BRAM_inst.ram[53] = 32'd1050;        
+//        dut.memory.BRAM_inst.ram[54] = 32'd2080;
+//        dut.memory.BRAM_inst.ram[55] = 32'd3000;
+//        dut.memory.BRAM_inst.ram[56] = 32'd1000;
+//        dut.memory.BRAM_inst.ram[57] = 32'd1050;
+//        dut.memory.BRAM_inst.ram[58] = 32'd2000;
+//        dut.memory.BRAM_inst.ram[59] = 32'd2050;
+//        dut.memory.BRAM_inst.ram[60] = 32'd2080;
+//        dut.memory.BRAM_inst.ram[61] = 32'd3000;
     end
 
 
