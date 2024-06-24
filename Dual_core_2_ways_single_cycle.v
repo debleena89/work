@@ -21,7 +21,7 @@
  *  THE SOFTWARE.
  */
 
-module Default_Project #(
+module Dual_core_2_ways_single_cycle #(
     parameter NUM_CORES=2,
     parameter DATA_WIDTH=32,
     parameter ADDRESS_BITS=32,
