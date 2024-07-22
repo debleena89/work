@@ -17,7 +17,7 @@ module tb_Dual_core_2_ways_single_cycle();
     parameter MEM_ADDRESS_BITS=14;
     parameter SCAN_CYCLES_MIN=0;
     parameter SCAN_CYCLES_MAX=1000;
-    parameter PROGRAM="./instructions1.dat"; // set path-name of hex instruction file
+    parameter PROGRAM="/home/debleena/CC/work/instructions1.dat"; // set path-name of hex instruction file
     parameter LOG_FILE="Dual_core_2_ways_single_cycle.log";
 
     genvar i;
@@ -77,30 +77,36 @@ module tb_Dual_core_2_ways_single_cycle();
            `REGISTER_FILE0[x] = 32'd0; `REGISTER_FILE1[x] = 32'd0;
         end
         $readmemh(PROGRAM, dut.memory.BRAM_inst.ram);
-        /* <-- Added By ISI team */
-        dut.memory.BRAM_inst.ram[10] = 32'd1000;
-        dut.memory.BRAM_inst.ram[11] = 32'd1050;
-        dut.memory.BRAM_inst.ram[12] = 32'd2000;
-        dut.memory.BRAM_inst.ram[13] = 32'd2050;
-        dut.memory.BRAM_inst.ram[14] = 32'd2080;
-        dut.memory.BRAM_inst.ram[15] = 32'd3000;
-        dut.memory.BRAM_inst.ram[48] = 32'd1000;
-        dut.memory.BRAM_inst.ram[49] = 32'd1050;
-        dut.memory.BRAM_inst.ram[50] = 32'd2000;
-        dut.memory.BRAM_inst.ram[51] = 32'd2050;
-        dut.memory.BRAM_inst.ram[52] = 32'd2080;
-        dut.memory.BRAM_inst.ram[53] = 32'd3000;
-        dut.memory.BRAM_inst.ram[54] = 32'd1000;
-        dut.memory.BRAM_inst.ram[55] = 32'd1050;        
-        dut.memory.BRAM_inst.ram[56] = 32'd2080;
-        dut.memory.BRAM_inst.ram[57] = 32'd3000;
-        dut.memory.BRAM_inst.ram[58] = 32'd1000;
-        dut.memory.BRAM_inst.ram[59] = 32'd1050;
-        dut.memory.BRAM_inst.ram[60] = 32'd2000;
-        dut.memory.BRAM_inst.ram[61] = 32'd2050;
-        dut.memory.BRAM_inst.ram[62] = 32'd2080;
-        dut.memory.BRAM_inst.ram[63] = 32'd3000;
-        /* Added By ISI team --> */
+/* <-- Added By ISI team */
+//       dut.memory.BRAM_inst.ram[10] = 32'd1000;
+//      dut.memory.BRAM_inst.ram[8] = 32'd1050;
+//      dut.memory.BRAM_inst.ram[9] = 32'd2000;
+//       dut.memory.BRAM_inst.ram[10] = 32'd2050;
+ //      dut.memory.BRAM_inst.ram[11] = 32'd2080;
+         dut.memory.BRAM_inst.ram[12] = 32'd0123;
+         dut.memory.BRAM_inst.ram[13] = 32'd0124;
+         dut.memory.BRAM_inst.ram[14] = 32'd0125;
+         dut.memory.BRAM_inst.ram[15] = 32'd0126;
+      // dut.memory.BRAM_inst.ram[64] = 32'd3000;
+//       dut.memory.BRAM_inst.ram[13] = 32'd1000;
+//       dut.memory.BRAM_inst.ram[49] = 32'd1050;
+//       dut.memory.BRAM_inst.ram[50] = 32'd2000;
+//       dut.memory.BRAM_inst.ram[51] = 32'd2050;
+//      dut.memory.BRAM_inst.ram[52] = 32'd2080;
+//       dut.memory.BRAM_inst.ram[53] = 32'd3000;
+//       dut.memory.BRAM_inst.ram[54] = 32'd1000;
+//       dut.memory.BRAM_inst.ram[55] = 32'd1050;        
+//       dut.memory.BRAM_inst.ram[56] = 32'd2080;
+//       dut.memory.BRAM_inst.ram[57] = 32'd3000;
+//       dut.memory.BRAM_inst.ram[58] = 32'd1000;
+//       dut.memory.BRAM_inst.ram[59] = 32'd1050;
+//       dut.memory.BRAM_inst.ram[60] = 32'd2000;
+//       dut.memory.BRAM_inst.ram[61] = 32'd2050;
+//       dut.memory.BRAM_inst.ram[62] = 32'd2080;
+//       dut.memory.BRAM_inst.ram[63] = 32'd3000;
+    /* Added By ISI team --> */
+        
+       
     end
 
 
@@ -115,7 +121,7 @@ module tb_Dual_core_2_ways_single_cycle();
         start = 0;
         core_finish_count = 0;
         for (core_i = 0; core_i < NUM_CORES; core_i = core_i+1) begin
-            program_address[core_i*ADDRESS_BITS +: ADDRESS_BITS] = core_i*32'h0000_0010;
+            program_address[core_i*ADDRESS_BITS +: ADDRESS_BITS] = core_i*32'h0000_0000;
         end
 
         #10 #1 reset = 0;
@@ -130,7 +136,7 @@ module tb_Dual_core_2_ways_single_cycle();
             $display("Could not open log file... Exiting!");
             $finish();
         end
-        #306 $finish();
+        #2000 $finish();
     end
 
     always begin

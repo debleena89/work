@@ -105,7 +105,7 @@ module Dual_core_2_ways_single_cycle #(
                 .ADDRESS_BITS(ADDRESS_BITS),
                 .SCAN_CYCLES_MIN(SCAN_CYCLES_MIN),
                 .SCAN_CYCLES_MAX(SCAN_CYCLES_MAX),
-                .RESET_PC(i*16)
+                .RESET_PC(i*16)//debleena i*16
             ) core(
                 .clock(clock),
                 .reset(reset),
@@ -194,7 +194,7 @@ module Dual_core_2_ways_single_cycle #(
         .INDEX_BITS_L1({32'd5, 32'd5, 32'd5, 32'd5}),
         .INDEX_BITS_L2(5),
         .MSG_BITS(4),
-        .NUM_L1_CACHES(4),
+        .NUM_L1_CACHES(4), //DEBLEENA
         .BUS_OFFSET_BITS(2),
         .MAX_OFFSET_BITS(2)
     ) cache_hier(

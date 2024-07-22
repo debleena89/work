@@ -196,6 +196,7 @@ wire [(ADDRESS_BITS-OFFSET_BITS)-1:0] REQ1_line, REQ2_line;
 wire [INDEX_BITS-1:0] REQ1_index, REQ2_index, address_index, snoop_index;
 wire [TAG_BITS-1:0] REQ1_tag, REQ2_tag, address_tag;
 wire [OFFSET_BITS-1:0] REQ1_offset;
+wire [OFFSET_BITS-1:0] REQ1_offset_CORE_DATA;
 wire [DATA_WIDTH-1:0] line_out_words [CACHE_WORDS-1:0];
 wire stall;
 wire [OFFSET_BITS-1:0] zero_offset;
@@ -227,6 +228,7 @@ assign REQ1_tag      = REQ1_word_addr[ADDRESS_BITS-1 -: TAG_BITS];
 assign REQ2_tag      = REQ2_word_addr[ADDRESS_BITS-1 -: TAG_BITS];
 assign address_tag   = address_shifted[ADDRESS_BITS-1 -: TAG_BITS];
 assign REQ1_offset   = REQ1_word_addr[0 +: OFFSET_BITS];
+assign REQ1_offset_CORE_DATA = REQ1_address[0 +: OFFSET_BITS];
 assign zero_offset   = 0;
 
 assign stall = ((REQ1_index == REQ2_index     ) & REQ2 & REQ1_write)    |
@@ -419,7 +421,7 @@ always @(posedge clock)begin
         end
         else begin
           r_cache2mem_msg     <= REQ1_write ? RFO_BCAST : R_REQ;
-          r_cache2mem_address <= (REQ1_word_addr >> OFFSET_BITS) << OFFSET_BITS;
+          r_cache2mem_address <= (REQ1_word_addr  << OFFSET_BITS);//debleena
           for(j=0; j<CACHE_WORDS; j=j+1)begin
             r_cache2mem_data[j] <= {DATA_WIDTH{1'b0}};
           end
@@ -678,7 +680,7 @@ endgenerate
 assign way_select1 = matched_way0;
 assign i_reset = reset | (state == RESET);
 
-assign cache2mem_address = r_cache2mem_address;
+assign cache2mem_address = r_cache2mem_address;//debleena
 generate
   for(i=0; i<CACHE_WORDS; i=i+1)begin: DATA2MEM
     assign cache2mem_data[i*DATA_WIDTH +: DATA_WIDTH] = r_cache2mem_data[i];
