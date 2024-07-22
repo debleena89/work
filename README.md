@@ -7,6 +7,9 @@
 ├── instructions1.dat ...................... hex instruction file currently being loaded by TB
 ├── instructions2.dat ...................... sample instruction file containing different instructions for testing
 └── tb_Dual_core_2_ways_single_cycle.v ..... TB
+
+|-- small changes are done to supprot lw operation
+
 ```
 
 # Usage Instructions
