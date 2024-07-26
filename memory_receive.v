@@ -69,9 +69,9 @@ assign load_data =
   load_type == 3'd1 ? {{DATA_WIDTH-8{1'b0}}             , shifted_data[7:0]}  : // LBU
   load_type == 3'd2 ? {{DATA_WIDTH-16{shifted_data[15]}}, shifted_data[15:0]} : // LH
   load_type == 3'd3 ? {{DATA_WIDTH-16{1'b0}}            , shifted_data[15:0]} : // LHU
-  load_type == 3'd4 ? {{DATA_WIDTH-32{shifted_data[31]}}, shifted_data[31:0]} : // LW
+  load_type == 3'd4 ? memory_data_in://{{DATA_WIDTH-32{shifted_data[31]}}, shifted_data[31:0]} : // LW
   load_type == 3'd5 ? {{DATA_WIDTH-32{1'b0}}            , shifted_data[31:0]} : // LWU
-  {DATA_WIDTH{1'b0}};
+  {DATA_WIDTH{1'b0}}; //debleena
 
 reg [31: 0] cycles;
 always @ (posedge clock) begin

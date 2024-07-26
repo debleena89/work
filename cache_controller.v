@@ -421,7 +421,7 @@ always @(posedge clock)begin
         end
         else begin
           r_cache2mem_msg     <= REQ1_write ? RFO_BCAST : R_REQ;
-          r_cache2mem_address <= (REQ1_word_addr  << OFFSET_BITS);//debleena
+          r_cache2mem_address <= (REQ1_word_addr >> OFFSET_BITS) << OFFSET_BITS;;//(REQ1_word_addr  << OFFSET_BITS);//debleena
           for(j=0; j<CACHE_WORDS; j=j+1)begin
             r_cache2mem_data[j] <= {DATA_WIDTH{1'b0}};
           end

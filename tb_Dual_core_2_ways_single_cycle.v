@@ -83,10 +83,21 @@ module tb_Dual_core_2_ways_single_cycle();
 //      dut.memory.BRAM_inst.ram[9] = 32'd2000;
 //       dut.memory.BRAM_inst.ram[10] = 32'd2050;
  //      dut.memory.BRAM_inst.ram[11] = 32'd2080;
+        dut.memory.BRAM_inst.ram[7] = 32'd0003;
+         dut.memory.BRAM_inst.ram[8] = 32'd0003;
+         dut.memory.BRAM_inst.ram[9] = 32'd0004;
+         dut.memory.BRAM_inst.ram[10] = 32'd0005;
+         dut.memory.BRAM_inst.ram[11] = 32'd0006;
          dut.memory.BRAM_inst.ram[12] = 32'd0123;
          dut.memory.BRAM_inst.ram[13] = 32'd0124;
          dut.memory.BRAM_inst.ram[14] = 32'd0125;
          dut.memory.BRAM_inst.ram[15] = 32'd0126;
+         dut.memory.BRAM_inst.ram[44] = 32'd0003;
+         dut.memory.BRAM_inst.ram[45] = 32'd0004;
+         dut.memory.BRAM_inst.ram[46] = 32'd0005;
+         dut.memory.BRAM_inst.ram[47] = 32'd0006;  
+         
+         
       // dut.memory.BRAM_inst.ram[64] = 32'd3000;
 //       dut.memory.BRAM_inst.ram[13] = 32'd1000;
 //       dut.memory.BRAM_inst.ram[49] = 32'd1050;

@@ -35,7 +35,7 @@ parameter STATUS_BITS_L1      = 2,
           INDEX_BITS_L1       = {32'd5, 32'd5, 32'd5, 32'd5},
           INDEX_BITS_L2       = 6,
           MSG_BITS            = 4,
-          NUM_L1_CACHES       = 4,
+          NUM_L1_CACHES       = 4, //4, debleena
           BUS_OFFSET_BITS     = 2,
           MAX_OFFSET_BITS     = 2
 )(
@@ -163,8 +163,55 @@ endgenerate
 
 //Instantiate L1 caches
 generate
-  for(i=0; i<NUM_L1_CACHES; i=i+1)begin: L1INST
+  for(i=0; i<NUM_L1_CACHES/2; i=i+1)begin: L1INST
     L1cache_wrapper #(
+      .STATUS_BITS(STATUS_BITS_L1),
+      .COHERENCE_BITS(COHERENCE_BITS),
+      .CACHE_OFFSET_BITS(OFFSET_BITS_L1[i*32 +: 32]),
+      .DATA_WIDTH(DATA_WIDTH),
+      .NUMBER_OF_WAYS(NUMBER_OF_WAYS_L1[i*32 +: 32]),
+      .ADDRESS_BITS(ADDRESS_BITS),
+      .INDEX_BITS(INDEX_BITS_L1[i*32 +: 32]),
+      .MSG_BITS(MSG_BITS),
+      .BUS_OFFSET_BITS(BUS_OFFSET_BITS),
+      .MAX_OFFSET_BITS(MAX_OFFSET_BITS),
+      .REPLACEMENT_MODE(REPLACEMENT_MODE_L1),
+      .CORE(i/2),
+      .CACHE_NO(i)
+    ) l1cache (
+      .clock(clock),
+      .reset(reset),
+      //processor interface
+      .read(read[i]),
+      .write(write[i]),
+      .w_byte_en(w_w_byte_en[i]),
+      .invalidate(invalidate[i]),
+      .flush(flush[i]),
+      .address(w_address[i]),
+      .data_in(w_data_in[i]),
+      .report(report),
+      .data_out(w_data_out[i]),
+      .out_address(w_out_address[i]),
+      .ready(ready[i]),
+      .valid(valid[i]),
+      //bus interface
+      .bus_msg_in(bus_msg),
+      .bus_address_in(bus_address),
+      .bus_data_in(bus_data),
+      .bus_msg_out(w_l1tobus_msg[i]),
+      .bus_address_out(w_l1tobus_address[i]),
+      .bus_data_out(w_l1tobus_data[i]),
+      .active_offset(w_l1tobus_offset[i]),
+      .bus_master(bus_master[i]),
+      .req_ready(req_ready),
+      .curr_offset(req_offset)
+    );
+  end
+endgenerate
+
+generate
+  for(i=NUM_L1_CACHES/2; i<NUM_L1_CACHES; i=i+1)begin: L1DATA
+    L1Datacache_wrapper #(
       .STATUS_BITS(STATUS_BITS_L1),
       .COHERENCE_BITS(COHERENCE_BITS),
       .CACHE_OFFSET_BITS(OFFSET_BITS_L1[i*32 +: 32]),
