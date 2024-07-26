@@ -10,6 +10,14 @@
 
 |-- small changes are done to supprot lw operation
 
+|--Data cache controller and Instructin cache controller are separated to make
+   the Load operation Functional. Now We are getting the particuluar value at
+   the specified Register. 
+|--For Store operation we are expecting that the value will not be written
+   directly to memory, A write miss occurs First time as the cache is empty,
+   then Read mem, data will come to Data cache and then the value at the
+   specified address will be updated in the cache, and in the WRITE_BACK
+   state that value will be stored back to memory.
 ```
 
 # Usage Instructions
