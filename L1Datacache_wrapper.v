@@ -20,7 +20,7 @@
  *  THE SOFTWARE.
  */
 
-module L1cache_wrapper #(
+module L1Datacache_wrapper #(
   parameter STATUS_BITS       =  2,
   parameter COHERENCE_BITS    =  2,
   parameter CACHE_OFFSET_BITS =  2,
@@ -199,7 +199,7 @@ assign snooper_hit         = mem_hit1;
 assign cache_offset_bits_wire = CACHE_OFFSET_BITS[log2(CACHE_OFFSET_BITS):0];
 
 //instantiate cache controller
-cache_controller #(
+Datacache_controller #(
   .STATUS_BITS(STATUS_BITS),
   .COHERENCE_BITS(COHERENCE_BITS),
   .OFFSET_BITS(CACHE_OFFSET_BITS),
