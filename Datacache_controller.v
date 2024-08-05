@@ -654,7 +654,7 @@ generate
     for(byte=0; byte<(DATA_WIDTH/8); byte=byte+1) begin: BYTE_LOOP
       //assign data_out0[i*DATA_WIDTH +: DATA_WIDTH][byte*8 +: 8] =
       assign data_out0[(i*DATA_WIDTH)+(byte*8) +: 8] =
-        REQ1_write & REQ1_w_byte_en[byte] & (i == REQ1_offset) ? REQ1_data[byte*8 +: 8] :
+        REQ1_write &/* REQ1_w_byte_en[byte] &*/ (i == REQ1_offset_CORE_DATA) ? REQ1_data[byte*8 +: 8] :   //debleena
         (state == WAIT_WS_ENABLE) ? r_line_out[i][byte*8 +: 8] : r_words_from_mem[i][byte*8 +: 8];
     end
   end
@@ -672,7 +672,7 @@ assign meta_data1 = {2'b11, MODIFIED};
 
 generate
   for(i=0; i<CACHE_WORDS; i=i+1)begin:DATA_OUT1
-    assign data_out1[i*DATA_WIDTH +: DATA_WIDTH] = (i == REQ1_offset) ?
+    assign data_out1[i*DATA_WIDTH +: DATA_WIDTH] = (i == REQ1_offset_CORE_DATA) ?  //debleena
       REQ1_data : data_in0[i*DATA_WIDTH +: DATA_WIDTH];
   end
 endgenerate
